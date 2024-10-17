@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<!-- Info -->
+<section class="bg-dark text-light p-5  text-center text-sm-start">
+    <div class="container">
+      <div class="d-sm-flex align-items-center justify-content-between">
+        <div>
+          <h1>Become a <span class="text-primary">Web Developer</span></h1>
+          <p class="lead my-4">
+            Join our comprehensive courses designed for beginners and experienced developers alike. <br>
+            Learn the latest technologies and frameworks to build modern web applications. <br>
+            Our hands-on approach ensures you gain practical experience while learning.
+          </p>
+          <a href="{% url 'login:login' %}" class="btn btn-primary btn-lg">Start your journey</a>
+        </div>
+        <img class="img-fluid w-50 h-50 d-none d-sm-block small mt-5" src="{% static 'images/foursquare-developer-documentation-developer-docs-text-symbol-art-transparent-png-2515166.png' %}" alt="">
+      </div>
+    </div>
+  </section>
+
+<!-- NewsLetter -->
+<section class="bg-primary text-light p-5">
+  <div class="container">
+    <div class="d-md-flex justify-content-between align-items-center">
+      <h3 class="mb-3 mb-md-0">Sign Up For Newsletter</h3>
+      <div class="input-group mb-3 news-input">
+        <input type="text" class="form-control" placeholder="Enter email" aria-label="Enter email" aria-describedby="button-addon2">
+        <button class="btn btn-dark btn-lg" type="button" id="button-addon2">Button</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Boxes -->
+<section class="p-5">
+  <div class="container">
+    <div class="row text-center g-4">
+      <div class="col-md">
+        <div class="card bg-dark text-light">
+          <div class="card-body text-center">
+            <div class="h1 mb-3"><i class="bi bi-laptop "></i>
+            </div>
+            <h3 class="card-title mb-3">Virtual</h3>
+            <p class="card-text">Anywhere you want.</p>
+            <a href="{% url 'pages:info' %}" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md">
+        <div class="card bg-dark text-light">
+          <div class="card-body text-center">
+            <div class="h1 mb-3">
+              <i class="bi bi-flower1"></i>
+            </div>
+            <h3 class="card-title mb-3">Grow</h3>
+            <p class="card-text">Like a flower</p>
+            <a href="{% url 'pages:info' %}" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md">
+        <div class="card bg-dark text-light">
+          <div class="card-body text-center">
+            <div class="h1 mb-3"><i class="bi bi-arrow-clockwise"></i>
+            </div>
+            <h3 class="card-title mb-3">Repeat</h3>
+            <p class="card-text">Study and repeat, repeat, repeat</p>
+            <a href="{% url 'pages:info' %}" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Learn Sections -->
+<section class="p-5" id="learn">
+  <div class="container">
+    <div class="row align-items-center justify-content-between">
+      <div class="col-md">
+        <img src="{% static 'images/free-icon-machine-learning-8593539.png' %}" class="img-fluid w-50">
+      </div>
+      <div class="col-md p-5">
+        <h2>Learn The Fundamentals</h2>
+        <p>Our courses cover the essential skills needed for web development, including HTML, CSS, and JavaScript.</p>
+        <p>We focus on both theoretical knowledge and practical application to prepare you for real-world projects.</p>
+        <a href="{% url 'pages:info' %}" class="btn btn-dark mt-3">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Info -->
+<section class="p-5 bg-dark" id="">
+    <div class="container">
+      <div class="row align-items-center justify-content-between">
+        <div class="col-md p-5 text-light">
+          <h2>Easy to go</h2>
+          <p>Our user-friendly platform makes learning easy and accessible for everyone, regardless of your background.</p>
+          <p>With a wealth of resources and support, you'll feel confident as you progress through your learning journey.</p>
+          <a href="{% url 'login:login' %}" class="btn btn-light mt-3">I’m Ready!</a>
+        </div>
+        <div class="col-md text-end">
+          <img src="{% static 'images/free-icon-easy-6056675.png' %}" class="img-fluid w-50 mx-5">
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- Questions -->
+<section class="p-5" id="questions">
+  <div class="container text-center">
+    <h2 class="pb-7">Frequently Asked Questions</h2>
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            What courses and training do you offer?
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>We offer a range of courses in web development, data science, and cybersecurity.</strong> Our training programs are designed to provide practical skills and knowledge, and they include hands-on projects and expert-led sessions.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            How can I contact customer support?
+          </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>You can reach our customer support team via email at support@example.com or by calling our hotline at (123) 456-7890.</strong> Our support hours are from 9 AM to 6 PM, Monday through Friday.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            What is your return policy?
+          </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <strong>We have a 30-day return policy.</strong> If you are not satisfied with your purchase, you can return it within 30 days for a full refund. Please ensure that the item is in its original condition and packaging.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Intructors Cards -->
+<section id="instructors" class="p-5 bg-primary">
+  <div class="container">
+    <h2 class="text-center text-white">
+      Our Instructors
+    </h2>
+    <p class="lead text-center text-white mb-5">
+      Dedicated professionals ready to guide you on your journey to becoming a web developer.
+    </p>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-light">
+          <div class="card-body text-center">
+            <img src="https://randomuser.me/api/portraits/men/9.jpg" alt="" class="rounded-circle mb-3">
+            <h3 class="card-title mb-3">John Kike</h3>
+            <p>John is an experienced web developer with a passion for teaching the latest technologies.</p>
+            <a href=""><i class="bi bi-instagram text-dark mx-1"></i></a>
+            <a href=""><i class="bi bi-telegram text-dark mx-1"></i></a>
+            <a href=""><i class="bi bi-twitter text-dark mx-1"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-light">
+          <div class="card-body text-center">
+            <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="" class="rounded-circle mb-3">
+            <h3 class="card-title mb-3">Pike Kalski</h3>
+            <p>Pike specializes in front-end development and is committed to helping students succeed.</p>
+            <a href=""><i class="bi bi-instagram text-dark mx-1"></i></a>
+            <a href=""><i class="bi bi-telegram text-dark mx-1"></i></a>
+            <a href=""><i class="bi bi-twitter text-dark mx-1"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="card bg-light">
+          <div class="card-body text-center">
+            <img src="https://randomuser.me/api/portraits/women/3.jpg" alt="" class="rounded-circle mb-3">
+            <h3 class="card-title mb-3">Sveta Kovalski</h3>
+            <p>Sveta brings a wealth of knowledge in back-end development and enjoys mentoring students.</p>
+            <a href=""><i class="bi bi-instagram text-dark mx-1"></i></a>
+            <a href=""><i class="bi bi-telegram text-dark mx-1"></i></a>
+            <a href=""><i class="bi bi-twitter text-dark mx-1"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contacts -->
+<section class="bg-light p-5" id="contacts">
+  <div class="div container align-items-center justify-content-between">
+    <div class="div row g-4">
+      <div class="col-md pr-5">
+        <h2 class="text-center mb-4">Contact Info</h2>
+          <ul class="list-group list-group-flush lead">
+            <li class="list-group-item">
+              <span class="fw-bold">Main Location:</span> Blascriotion 50
+            </li>
+            <li class="list-group-item">
+              <span class="fw-bold">Phone:</span>(888) 555-5555
+            </li>
+            <li class="list-group-item">
+              <span class="fw-bold">Email:</span> theemail@mail.com
+            </li>
+          </ul>
+      </div>
+      <div class="col-md">
+        <div class="container">
+          <iframe src="https://yandex.ru/map-widget/v1/?ll=30.306929%2C59.939315&z=12"
+            width="500"
+            height="200"
+            frameborder="1"
+            allowfullscreen="true"
+            style="position:relative; border-radius: 10px;">
+          </iframe>
+      </div>
+  </div>
+</section>
+{% endblock %}

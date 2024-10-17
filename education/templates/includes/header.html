@@ -1,0 +1,36 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+    <div class="container">
+      <a href="{% url 'main:index' %}" class="navbar-brand ms-auto">
+          <img src="{% static 'images/5338259.png' %}" class="small glow-effect" alt="Logotype">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmenu">
+        <ul class="navbar-nav ms-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a href="{% url 'account:my_account' %}" class="nav-link">My account</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">My courses</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a href="{% url 'login:login' %}" class="nav-link">Login</a>
+            </li>
+          {% endif %}
+          <li class="nav-item">
+            <a href="{% url 'catalog:catalog' %}" class="nav-link">Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'cart:cart' %}" class="nav-link">Cart</a>
+          </li>
+          <li class="nav-item">
+            <a href="{% url 'pages:info' %}" class="nav-link">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>

@@ -1,0 +1,40 @@
+@media(min-width: 768px) {
+    .new-input {
+        width: 50%;
+    }
+}
+
+body::before {
+  display: block;
+  content: '';
+  height: 70px;
+}
+
+.small {
+    width: 50px;
+    height: 50px;
+  }
+
+.glow-effect {
+    transition: all 0.3s ease-in-out; /* Плавный переход */
+  }
+
+.glow-effect:hover {
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)); /* Свечение вокруг формы изображения */
+  }
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    flex: 1;
+}
+
+.custom-caption {
+  padding-bottom: 10px; /* Увеличьте или уменьшите это значение для регулировки отступа */
+}

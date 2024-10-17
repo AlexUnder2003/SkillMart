@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+  <div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="row w-100">
+      <div class="col-md-6 mx-auto">
+        <h2 class="text-center mb-4">Registration</h2>
+
+        <!-- Вывод сообщений об успехе или ошибках -->
+        {% if messages %}
+          <div class="mb-2">
+            {% for message in messages %}
+              <div class="alert text-danger text-center alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <form method="POST">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label for="username" class="form-label">Username</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="bi bi-person"></i>
+              </span>
+              <input type="text" class="form-control form-control-lg" id="username" name="username" required>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="email" class="form-label">Email</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="bi bi-envelope"></i>
+              </span>
+              <input type="email" class="form-control form-control-lg" id="email" name="email" required>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="bi bi-lock"></i>
+              </span>
+              <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label for="confirm_password" class="form-label">Repeat password</label>
+            <div class="input-group">
+              <span class="input-group-text">
+                <i class="bi bi-lock"></i>
+              </span>
+              <input type="password" class="form-control form-control-lg" id="confirm_password" name="confirm_password" required>
+            </div>
+            <div id="passwordError" class="text-danger mt-2" style="display: none;">
+              Пароли не совпадают!
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg w-100">Create account</button>
+          <div class="text-center mt-3">
+            <a href="{% url 'login:login' %}">Already have an account? Login</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

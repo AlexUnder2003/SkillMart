@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+<div class="container p-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto mt-5">
+      <h2 class="mb-4">My Account</h2>
+      <form class="row g-3" method="POST" action="{% url 'account:update' %}">
+        {% csrf_token %}
+        {% if messages %}
+          {% for message in messages %}
+            {% if message.tags == 'success' %}
+              <div class="text-center text-success mt-3">{{ message }}</div>
+            {% elif message.tags == 'error' %}
+              <div class="text-center text-danger mt-3">{{ message }}</div>
+            {% else %}
+              <div class="text-center mt-3">{{ message }}</div>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        <div class="col-md-6">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+        </div>
+        <div class="col-md-6">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+        </div>
+        <div class="col-12">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St" value="{{ user_profile.address }}">
+        </div>
+        <div class="col-12">
+            <label for="inputAddress2" class="form-label">Address 2</label>
+            <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="Apartment, studio, or floor" value="{{ user_profile.address2 }}">
+        </div>
+        <div class="col-md-6">
+            <label for="birthday" class="form-label">Birthday</label>
+            <input type="date" class="form-control" id="birthday" name="birthday" value="{{ user_profile.birthday|date:'Y-m-d' }}">
+        </div>
+        <div class="col-md-6">
+            <label for="gender" class="form-label">Gender</label>
+            <select id="gender" name="gender" class="form-select">
+                <option value="" {% if not user_profile.gender %}selected{% endif %}>Choose...</option>
+                <option value="M" {% if user_profile.gender == 'M' %}selected{% endif %}>Male</option>
+                <option value="F" {% if user_profile.gender == 'F' %}selected{% endif %}>Female</option>
+                <option value="O" {% if user_profile.gender == 'O' %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+        <div class="col-12 text-end">
+          <button type="submit" class="btn btn-primary">Save</button>
+          <a href="{% url 'account:logout' %}" class="btn btn-danger">Logout</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Войти в аккаунт{% endblock %}
+
+{% block content %}
+  <div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="row w-100">
+      <div class="col-md-6 mx-auto">
+          <h2 class="text-center mb-4">Login</h2>
+
+          {% if messages %}
+            {% for message in messages %}
+              <div class="text-center text-danger alert-{{ message.tags }} mt-3">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+
+          <form method="POST">
+              {% csrf_token %}
+              <div class="mb-4">
+                  <label for="username" class="form-label">Username</label>
+                  <div class="input-group">
+                      <span class="input-group-text">
+                          <i class="bi bi-person"></i>
+                      </span>
+                      <input type="text" class="form-control form-control-lg" id="username" name="username" required>
+                  </div>
+              </div>
+              <div class="mb-4">
+                  <label for="password" class="form-label">Password</label>
+                  <div class="input-group">
+                      <span class="input-group-text">
+                          <i class="bi bi-lock"></i>
+                      </span>
+                      <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+                  </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg w-100">Authorize</button>
+              <div class="text-center mt-3">
+                  <a href="{% url 'registration-app:register' %}" class="text-center">Create an account</a>
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
