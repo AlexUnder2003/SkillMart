@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 # Функция для загрузки данных из JSON
 def load_products():
-    with open('C:\\Users\\Alex\\Desktop\\app\\products.json', 'r') as file:
+    with open(r'D:\coursemarket\products.json', 'r') as file:
         data = json.load(file)
     return data
 
