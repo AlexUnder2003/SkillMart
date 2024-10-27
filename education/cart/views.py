@@ -17,7 +17,7 @@ def checkout(request):
             order = Order(product_id=product_id, quantity=quantity, total_price=total_price)
             order.save()
 
-            purchased_course = PurchasedCourse(user=request.user, course_id=product_id)
+            purchased_course = PurchasedCourse(user=request.user, course=product_id)
             purchased_course.save()
 
         request.session['cart'] = {}

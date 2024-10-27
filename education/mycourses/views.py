@@ -16,7 +16,7 @@ def my_courses(request):
 
         # Создаем список курсов для отображения
         for purchased_course in purchased_courses:
-            course_id = str(purchased_course.course_id)
+            course_id = str(purchased_course.course)
             course = all_courses.get(course_id)
             if course:
                 courses.append(course)

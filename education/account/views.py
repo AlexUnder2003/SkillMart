@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.utils.timezone import now
+
 from .models import UserProfile
 
 
@@ -10,6 +12,7 @@ def my_account(request):
     user_profile = UserProfile.objects.get(user=request.user)
 
     return render(request, 'pages/my_account.html', {
+        'now': now(),
         'user': request.user,
         'user_profile': user_profile
     })
