@@ -14,7 +14,7 @@
               <a href="{% url 'account:my_account' %}" class="nav-link">My account</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">My courses</a>
+              <a href="{% url 'mycourses:usercourse' %}" class="nav-link">My courses</a>
             </li>
           {% else %}
             <li class="nav-item">

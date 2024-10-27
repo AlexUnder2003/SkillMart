@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}\
+<div class="container">
+  <h1>Your courses</h1>
+  <div class="container col-xxl-8 px-4 py-5">
+      {% for course in courses %}
+      <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+          <div class="col-10 col-sm-8 col-lg-6">
+              <img src="{{ course.imageurl }}" class="d-block mx-lg-auto img-fluid" alt="{{ course.title }}" width="700" height="500" loading="lazy">
+          </div>
+          <div class="col-lg-6">
+              <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{ course.title }}</h1>
+              <p class="lead">{{ course.description }}</p>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                  <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Study</button>
+              </div>
+          </div>
+      </div>
+      {% empty %}
+      <h1 class="text-center">You currently have no purchased courses.</h1>
+      {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,3 +1,4 @@
 education/static/
 venv/
 gitignore
+education/db.sqlite3

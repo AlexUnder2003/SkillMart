@@ -1,35 +1,41 @@
 import json
+
 from django.shortcuts import render, redirect
-from .models import Order  # Импортируйте вашу модель заказа
+
+from mycourses.models import PurchasedCourse
+from .models import Order
 
 def checkout(request):
     if request.method == 'POST':
         cart = request.session.get('cart', {})
 
-        # Обрабатываем заказ
         for product_id, item in cart.items():
             quantity = item['quantity']
             price = item['price']
             total_price = quantity * price
 
-            # Сохраняем заказ в базу данных
             order = Order(product_id=product_id, quantity=quantity, total_price=total_price)
             order.save()
 
-        # Очищаем корзину
+            purchased_course = PurchasedCourse(user=request.user, course_id=product_id)
+            purchased_course.save()
+
         request.session['cart'] = {}
 
         return redirect('cart:success')
 
     return render(request, 'pages/checkout.html')
 
+
 def success(request):
     return render(request, 'pages/success.html')
+
 
 def load_products():
     with open(r'D:\coursemarket\products.json', 'r') as file:
         data = json.load(file)
     return data
+
 
 def add_to_cart(request, product_id):
     products = load_products()
