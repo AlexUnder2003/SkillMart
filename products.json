@@ -1,0 +1,50 @@
+{
+    "1": {
+        "id": 1,
+        "imageurl": "/static/images/catalog/image1.png",
+        "title": "Python Developer",
+        "description": "Backend on Python. From zero.",
+        "details": "Learn to build scalable and secure backend applications using Python, covering everything from the basics to advanced concepts.",
+        "price": 100
+    },
+    "2": {
+        "id": 2,
+        "imageurl": "/static/images/catalog/image3.png",
+        "title": "Machine Learning",
+        "description": "Learn it like a machine",
+        "details": "A comprehensive course on machine learning algorithms, including supervised and unsupervised learning, and practical implementation with Python.",
+        "price": 120
+    },
+    "3": {
+        "id": 3,
+        "imageurl": "/static/images/catalog/image2.png",
+        "title": "Fullstack",
+        "description": "Awesome duo!",
+        "details": "Master both frontend and backend technologies, combining the best of both worlds to create full-fledged web applications.",
+        "price": 150
+    },
+    "4": {
+        "id": 4,
+        "imageurl": "/static/images/catalog/image4.png",
+        "title": "Soft skills",
+        "description": "Improve!",
+        "details": "Enhance your communication, teamwork, and leadership abilities to succeed in any professional environment.",
+        "price": 80
+    },
+    "5": {
+        "id": 5,
+        "imageurl": "/static/images/catalog/image6.png",
+        "title": "Cyber security",
+        "description": "Secure your data",
+        "details": "Learn about modern cybersecurity threats and best practices for securing your applications and data.",
+        "price": 200
+    },
+    "6": {
+        "id": 6,
+        "imageurl": "/static/images/catalog/image5.png",
+        "title": "Java developer",
+        "description": "A golden classic",
+        "details": "A deep dive into Java development, covering everything from object-oriented programming to enterprise-level applications.",
+        "price": 110
+    }
+}

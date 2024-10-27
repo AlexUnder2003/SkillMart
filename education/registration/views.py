@@ -23,8 +23,8 @@ def register_user(request):
             elif User.objects.filter(email=email).exists():
                 messages.error(request, 'Пользователь с таким email уже существует.')
             else:
-                user = User.objects.create_user(username=username, email=email, password=password)
-                user.save()
+                User.objects.create_user(username=username, email=email, password=password)
+                messages.success(request, 'Регистрация прошла успешно!')
                 return redirect('login:login')
         else:
             messages.error(request, 'Пароли не совпадают.')
