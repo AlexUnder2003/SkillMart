@@ -20,40 +20,30 @@
             {% endif %}
           {% endfor %}
         {% endif %}
+
         <div class="col-md-6">
             <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+            {{ form.username }}
         </div>
         <div class="col-md-6">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+            {{ form.email }}
         </div>
         <div class="col-12">
-            <label for="inputAddress" class="form-label">Address</label>
-            <input type="text" class="form-control" id="inputAddress" name="address" placeholder="1234 Main St" value="{{ user_profile.address }}">
+            <label for="address" class="form-label">Address</label>
+            {{ form.address }}
         </div>
         <div class="col-12">
-            <label for="inputAddress2" class="form-label">Address 2</label>
-            <input type="text" class="form-control" id="inputAddress2" name="address2" placeholder="Apartment, studio, or floor" value="{{ user_profile.address2 }}">
+            <label for="address2" class="form-label">Address 2</label>
+            {{ form.address2 }}
         </div>
         <div class="col-md-6">
             <label for="birthday" class="form-label">Birthday</label>
-            {% if user_profile.birthday  %}
-              <input type="date" class="form-control" id="birthday" name="birthday"
-                    value="{{ user_profile.birthday|date:'Y-m-d' }}">
-            {% else %}
-              <input type="date" class="form-control" id="birthday" name="birthday"
-                    value="{{ now|date:'Y-m-d' }}">
-            {% endif %}
+            {{ form.birthday }}
         </div>
         <div class="col-md-6">
             <label for="gender" class="form-label">Gender</label>
-            <select id="gender" name="gender" class="form-select">
-                <option value="" {% if not user_profile.gender %}selected{% endif %}>Choose...</option>
-                <option value="M" {% if user_profile.gender == 'M' %}selected{% endif %}>Male</option>
-                <option value="F" {% if user_profile.gender == 'F' %}selected{% endif %}>Female</option>
-                <option value="O" {% if user_profile.gender == 'O' %}selected{% endif %}>Other</option>
-            </select>
+            {{ form.gender }}
         </div>
         <div class="col-12 text-end">
           <button type="submit" class="btn btn-primary">Save</button>
