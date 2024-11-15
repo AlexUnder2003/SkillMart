@@ -1,6 +1,7 @@
 from django import forms
 from .models import Order
 
+
 class CheckoutForm(forms.ModelForm):
     username = forms.CharField(
         max_length=30,

@@ -1,123 +1,103 @@
 import json
-
-from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, FormView, View
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from mycourses.models import PurchasedCourse
 from .forms import CheckoutForm
 from .models import Order
 
 
-def checkout(request):
-    if request.method == 'POST':
-        cart = request.session.get('cart', {})
+class CartView(TemplateView):
+    template_name = 'pages/cart.html'
 
-        # Заполняем форму данными из POST-запроса
-        form = CheckoutForm(request.POST)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart = self.request.session.get('cart', {})
+        total_price = sum(item.get('quantity', 0) * item.get('price', 0) for item in cart.values())
 
-        if form.is_valid():
-            # Извлекаем данные из формы
-            first_name = form.cleaned_data['first_name']
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            username = form.cleaned_data.get('username', request.user.username if request.user.is_authenticated else '')
-
-            print(first_name)
-            # Создаём заказы для каждого товара в корзине
-            for product_id, item in cart.items():
-                quantity = item['quantity']
-                price = item['price']
-                total_price = quantity * price
-
-                order = Order(
-                    user=request.user if request.user.is_authenticated else None,
-                    product_id=product_id,
-                    quantity=quantity,
-                    total_price=total_price,
-                    first_name=first_name,
-                    last_name=last_name,
-                    email=email,
-                )
-                order.save()
-
-                # Сохраняем информацию о приобретённых курсах
-                purchased_course = PurchasedCourse(user=request.user, course=product_id)
-                purchased_course.save()
-
-            # Очищаем корзину после успешного оформления заказа
-            request.session['cart'] = {}
-
-            return redirect('cart:success')
-        else:
-            # Если форма не прошла валидацию, вернём страницу с ошибками
-            print('Form is not valid')
-            print(form.errors)
-            return render(request, 'pages/cart.html', {
-                'form': form,
-                'cart_items': cart,
-                'total_price': sum(item.get('quantity', 0) * item.get('price', 0) for item in cart.values())
-            })
-
-    # GET-запрос: отображаем форму для ввода данных
-    else:
-        form = CheckoutForm()
-        return render(request, 'pages/cart.html', {
-            'form': form,
-            'cart_items': cart,
-            'total_price': sum(item.get('quantity', 0) * item.get('price', 0) for item in cart.values())
-        })
-
-
-
-def success(request):
-    return render(request, 'pages/success.html')
-
-
-def load_products():
-    with open(r'D:\coursemarket\products.json', 'r') as file:
-        data = json.load(file)
-    return data
-
-
-def add_to_cart(request, product_id):
-    products = load_products()
-    cart = request.session.get('cart', {})
-
-    print(f"Cart before adding: {cart}")
-
-    product = products.get(str(product_id))
-    if product:
-        if str(product_id) in cart:
-            cart[str(product_id)]['quantity'] += 1
-
-        else:
-            cart[str(product_id)] = {
-                'quantity': 1,
-                'title': product['title'],
-                'price': product['price'],
+        user_data = {}
+        if self.request.user.is_authenticated:
+            user_data = {
+                'email': self.request.user.email,
+                'username': self.request.user.username,
             }
 
-        request.session['cart'] = cart
+        form = CheckoutForm(initial=user_data)
+        context.update({
+            'cart_items': cart,
+            'total_price': total_price,
+            'form': form,
+        })
+        return context
 
-    return redirect('cart:cart')
+
+class CheckoutView(FormView):
+    template_name = 'pages/cart.html'
+    form_class = CheckoutForm
+    success_url = reverse_lazy('cart:success')
+
+    def form_valid(self, form):
+        cart = self.request.session.get('cart', {})
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        email = form.cleaned_data['email']
+        username = form.cleaned_data.get('username', self.request.user.username if self.request.user.is_authenticated else '')
+
+        for product_id, item in cart.items():
+            quantity = item['quantity']
+            price = item['price']
+            total_price = quantity * price
+
+            order = Order(
+                user=self.request.user if self.request.user.is_authenticated else None,
+                product_id=product_id,
+                quantity=quantity,
+                total_price=total_price,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+            )
+            order.save()
+
+            purchased_course = PurchasedCourse(user=self.request.user, course=product_id)
+            purchased_course.save()
+
+        self.request.session['cart'] = {}
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        cart = self.request.session.get('cart', {})
+        total_price = sum(item.get('quantity', 0) * item.get('price', 0) for item in cart.values())
+        return self.render_to_response(self.get_context_data(form=form, cart_items=cart, total_price=total_price))
 
 
-def cart(request):
-    cart = request.session.get('cart', {})
+class SuccessView(TemplateView):
+    template_name = 'pages/success.html'
 
-    user_data = {}
 
-    if request.user.is_authenticated:
-        user_data = {
-            'email': request.user.email,
-            'username': request.user.username,
-        }
+class AddToCartView(View):
+    def post(self, request, product_id):
+        products = self.load_products()
+        cart = request.session.get('cart', {})
+        product = products.get(str(product_id))
 
-    form = CheckoutForm(initial=user_data)
+        if product:
+            if str(product_id) in cart:
+                cart[str(product_id)]['quantity'] += 1
+            else:
+                cart[str(product_id)] = {
+                    'quantity': 1,
+                    'title': product['title'],
+                    'price': product['price'],
+                }
 
-    total_price = sum(item.get('quantity', 0) * item.get('price', 0) for item in cart.values())
+            request.session['cart'] = cart
 
-    return render(request, 'pages/cart.html', {
-        'cart_items': cart,
-        'total_price': total_price,
-        'form': form
-    })
+        return redirect('cart:cart')
+
+    @staticmethod
+    def load_products():
+        with open(r'D:\coursemarket\products.json', 'r') as file:
+            return json.load(file)

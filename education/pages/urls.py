@@ -1,10 +1,8 @@
 from django.urls import path
+from .views import InfoView
 
-from . import views
-
-
-app_name = 'pages'
+app_name = 'main'
 
 urlpatterns = [
-    path('info/', views.info, name='info'),
+    path('info/', InfoView.as_view(), name='info'),
 ]

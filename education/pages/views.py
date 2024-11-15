@@ -1,5 +1,5 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def info(request):
-    return render(request, 'pages/info.html')
+class InfoView(TemplateView):
+    template_name = 'pages/info.html'

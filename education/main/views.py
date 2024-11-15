@@ -1,10 +1,5 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def index(request):
-    """
-    Отображает главную страницу
-    """
-    template = 'main/index.html'
-
-    return render(request, template)
+class IndexView(TemplateView):
+    template_name = 'main/index.html'

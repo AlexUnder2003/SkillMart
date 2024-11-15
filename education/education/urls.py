@@ -12,5 +12,5 @@ urlpatterns = [
     path('catalog/', include('catalog.urls', namespace='catalog')),
     path('account/', include('account.urls', namespace='account')),
     path('mycourses/', include('mycourses.urls', namespace='mycourses')),
-    path('', include('main.urls', namespace='main')),
+    path('', include('main.urls', namespace='home')),
 ]
